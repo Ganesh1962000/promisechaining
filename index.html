@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise-Chaining</title>
+</head>
+<body>
+
+    <script>
+
+        //Promise-Chaining
+
+         function fun1(){
+            return new Promise (function(resolve,reject){
+                setTimeout(function () {
+                   resolve("Success");
+                   fun2()
+                },3000)
+            });
+        }
+
+        function fun2(){
+            return new Promise (function(resolve,reject){
+                setTimeout(function () {
+                   reject("errrr")
+                },2000)
+            });
+        }
+
+        fun1()
+        .then(function(res){
+            console.log(res);
+            fun2()
+            .then(function(res1){
+                console.log(res1);
+            })
+            .catch(function(err1){
+                console.log(err1);
+            });
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+
+    </script>
+    
+</body>
+</html>
